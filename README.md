@@ -15,83 +15,48 @@ by [Javascript Israel](https://www.meetup.com/javascript-israel/)
 ![daisyui logo](https://raw.githubusercontent.com/saadeghi/files/main/daisyui/logo-4.svg)
 </div>
 
-## Add themes
+## Making our website more responsive by adding container
 
-First let's generate "daisyUI theme" we will do so by clicking [here](https://daisyui.com/theme-generator/).
+Let's make our website/application more responsive by adding container class to `/src/routes/layout.tsx`
+We will add it to main and to the footer:
 
-After generating our theme let's add it to `tailwind.config.js` file:
-
+The file should look like this:
 ```javascript
-module.exports = {
-    // Exisiting code ...
-    daisyui: {
-        themes: [
-            {
-                mytheme: {
-
-                    "primary": "#2563eb",
-
-                    "secondary": "#bbf7d0",
-
-                    "accent": "#37CDBE",
-
-                    "neutral": "#3D4451",
-
-                    "base-100": "#FFFFFF",
-
-                    "info": "#3ABFF8",
-
-                    "success": "#36D399",
-
-                    "warning": "#FBBD23",
-
-                    "error": "#F87272",
-                },
-            },
-            'business'
-        ],
-        darkTheme: "business",
-    },
-}
-```
-
----
-### Cleanup some boilerplate code
-1. Remove all unnecessary css code from `global.css` leaving only this
-```css
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-```
-2. Remove all the unnecessary code from homepage `/src/routes/index.ts` leaving only this
-```javascript
-import { component$ } from "@builder.io/qwik";
-import type { DocumentHead } from "@builder.io/qwik-city";
+import { component$, Slot } from "@builder.io/qwik";
+import Header from "../components/header/header";
 
 export default component$(() => {
   return (
-    <div>
-      <h1>
-        Welcome to Qwik <span class="lightning">⚡️</span>
-      </h1>
-    </div>
+    <>
+      <main class="lg:container mx-5 lg:mx-auto min-h-screen">
+        <Header />
+        <section>
+          <Slot />
+        </section>
+      </main>
+      <footer class="lg:container mx-5 lg:mx-auto">
+        <a href="https://www.builder.io/" target="_blank">
+          Made with ♡ by Builder.io
+        </a>
+      </footer>
+    </>
   );
 });
-
-export const head: DocumentHead = {
-  title: "Welcome to Qwik",
-  meta: [
-    {
-      name: "description",
-      content: "Qwik site description",
-    },
-  ],
-};
-
 ```
-# End of part II
 
-To continue checkout branch name `3-after-cleanup`
+Now let's use `Tailwindcss` to add some style to our homepage `/src/routes/indes.tsx`:
+
+Lets change the `<h1>` tag and add the following classes:
+```html
+<h1 class="text-3xl text-primary hover:text-accent transition-all">
+        Welcome to Qwik <span class="lightning">⚡️</span>
+</h1>
+```
+### Nice ! Tailwind is working
+
+# End of part III
+
+To continue checkout branch name `4-after-cleanup`
 
 <br/>
 <br/>
